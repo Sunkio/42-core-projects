@@ -1,7 +1,7 @@
 # 42_gnl
 
 [![Open in Visual Studio Code](https://open.vscode.dev/badges/open-in-vscode.svg)](https://open.vscode.dev/sunkio/42-core-projects/42_libft)
-![Licence](https://img.shields.io/github/license/sunkio/42_get-next-line)
+![Licence](https://img.shields.io/github/license/sunkio/42-core-projects)
 
 ## Language used
 ![C](https://img.shields.io/badge/-C-000?&logo=C)
