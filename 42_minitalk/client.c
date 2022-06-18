@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tschmidt <tschmidt@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/13 17:48:00 by tschmidt          #+#    #+#             */
-/*   Updated: 2022/01/16 10:22:09 by tschmidt         ###   ########.fr       */
+/*   Created: 2022/01/16 13:28:29 by tschmidt          #+#    #+#             */
+/*   Updated: 2022/01/16 13:32:05 by tschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	ft_atoi(const char *str)
 void	handle_server_response(int signo)
 {
 	if (signo == SIGUSR1)
-		usleep(300);
+		usleep(500);
 	if (signo != SIGUSR1)
 		ft_printf("Your message was received!\n");
 }
@@ -56,10 +56,7 @@ void	send_char(pid_t pid, unsigned char message_char)
 	while (mask)
 	{
 		if (message_char & mask)
-		{
 			kill(pid, SIGUSR1);
-			usleep(300);
-		}
 		else
 			kill(pid, SIGUSR2);
 		usleep(300);
@@ -85,10 +82,15 @@ int	main(int argc, char **argv)
 	struct sigaction	s_server_response;
 	pid_t				pid;
 
-	pid = ft_atoi(argv[1]);
-	if (argc != 3 || !pid)
+	if (argc != 3)
 	{
 		ft_printf("Please try again with a valid PID and a message.\n");
+		return (1);
+	}
+	pid = ft_atoi(argv[1]);
+	if (!pid)
+	{
+		ft_printf("Please try again with a valid PID!\n");
 		return (1);
 	}
 	s_server_response.sa_handler = handle_server_response;
